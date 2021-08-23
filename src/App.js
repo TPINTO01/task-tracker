@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
 
 const App = () => {
   const [tasks, setTasks] = useState([
@@ -26,12 +27,11 @@ const App = () => {
 
   // Delete Task
   const deleteTask = (id) => {
-    // console.log('delete', id)
     setTasks(tasks.filter((task) => task.id !== id))
   } 
 
+  // Toggle Reminder
   const toggleReminder = (id) => {
-    console.log('Set reminder for ', id)
     setTasks(
       tasks.map((task) => 
         task.id === id ? { ...task, reminder: 
@@ -42,7 +42,8 @@ const App = () => {
 
   return (
     <div className="container">
-      <Header /> 
+      <Header/> 
+      <AddTask/>
       {tasks.length > 0 ? (
         <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>
       ) : (
